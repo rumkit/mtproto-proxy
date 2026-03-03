@@ -29,4 +29,6 @@ while IFS= read -r key; do
 done < "$USER_SECRETS_FILE"
 
 exec ./mtproto-proxy -u nobody -p 8888 -H 443 \
-     --aes-pwd proxy-secret proxy-multi.conf --http-stats $USER_SECRETS
+     --aes-pwd ${CONFIG_PATH}/proxy-secret ${CONFIG_PATH}/proxy-multi.conf \
+     --http-stats \
+     $USER_SECRETS
