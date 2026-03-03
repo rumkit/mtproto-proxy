@@ -1,0 +1,34 @@
+name: Publish docker container flow
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build_docker_image:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write  
+    steps:
+    - name: Set image name and postfix
+      run: |
+        echo "DOCKER_IMAGE_POSTFIX=$(date +%Y-%m-%d_%s)" >> "$GITHUB_ENV"
+        echo "DOCKER_IMAGE_NAME=ghcr.io/rumkit/mtproto-proxy" >> "$GITHUB_ENV"
+    - name: Checkout the repo
+      uses: actions/checkout@v4
+
+    - name: Log in to the Container registry
+      uses: docker/login-action@v3
+      with:
+        registry: https://ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and push image
+      uses: docker/build-push-action@v6
+      with:
+        context: "{{defaultContext}}"
+        file: Dockerfile
+        push: true
+        tags: ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_POSTFIX }},${{ env.DOCKER_IMAGE_NAME }}:latest
