@@ -1,6 +1,6 @@
 #!/bin/sh
 
-USER_SECRETS_FILE="user-secrets.txt"
+USER_SECRETS_FILE="${CONFIG_PATH}/user-secrets.txt"
 
 # Check if user secrets need to be generated
 if [ ! -f "$USER_SECRETS_FILE" ]; then
