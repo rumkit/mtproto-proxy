@@ -18,7 +18,7 @@ FROM ubuntu:latest
 ENV CONFIG_PATH="/data"
 # install runtime deps
 RUN apt -y update; \
-    apt -y install cron xxd curl; \
+    apt -y install cron xxd curl ntp; \
     apt -y clean
 
 # copy artifacts from build stage

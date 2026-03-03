@@ -2,6 +2,9 @@
 
 USER_SECRETS_FILE="${CONFIG_PATH}/user-secrets.txt"
 
+# Start NTP service
+service ntpsec start
+
 # Check if user secrets need to be generated
 if [ ! -f "$USER_SECRETS_FILE" ]; then
     echo "User secrets file not found. Creating new file and generating secrets..."
