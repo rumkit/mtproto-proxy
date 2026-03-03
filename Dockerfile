@@ -27,6 +27,7 @@ COPY start.sh /mtproxy
 RUN mkdir /data
 
 WORKDIR /mtproxy
+RUN chmod +x start.sh
 
 # download key and config
 RUN curl -s https://core.telegram.org/getProxySecret -o ${CONFIG_PATH}/proxy-secret; \

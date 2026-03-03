@@ -1,6 +1,6 @@
 services:
   mtproto-proxy:
-    #image: rumkit/mtproxy:latest
+    #image: ghcr.io/rumkit/mtproto-proxy:latest
     build:
       context: .
     container_name: mtproxy
@@ -10,3 +10,5 @@ services:
     ports:
       - 14443:443/udp
       - 14443:443/tcp
+volumes:
+  proxy-config:
