@@ -13,7 +13,7 @@ USER_SECRETS_COUNT=5
 if [ ! -f "${CONFIG_PATH}/proxy-secret" ]; then
 curl -s https://core.telegram.org/getProxySecret -o ${CONFIG_PATH}/proxy-secret
 fi
-if [ ! -f " ${CONFIG_PATH}/proxy-multi.conf" ]; then
+if [ ! -f "${CONFIG_PATH}/proxy-multi.conf" ]; then
 curl -s https://core.telegram.org/getProxyConfig -o ${CONFIG_PATH}/proxy-multi.conf
 fi
 
@@ -47,9 +47,8 @@ echo "
 cron
 
 # Run proxy
-exec ./mtproto-proxy -u nobody -p 8888 -H 443 \
+exec ./mtproto-proxy -u nobody -p 8888 -H ${CLIENT_PORT} \
      --aes-pwd ${CONFIG_PATH}/proxy-secret ${CONFIG_PATH}/proxy-multi.conf \
      --http-stats \
-     --nat-info ${INT_IP}:${EXT_IP}
-     -M 1
+     --nat-info ${INT_IP}:${EXT_IP} \
      ${USER_SECRETS}
