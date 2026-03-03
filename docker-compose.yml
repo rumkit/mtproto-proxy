@@ -1,0 +1,12 @@
+services:
+  mtproto-proxy:
+    #image: rumkit/mtproxy:latest
+    build:
+      context: .
+    container_name: mtproxy
+    volumes:
+      - proxy-config:/data
+    restart: unless-stopped
+    ports:
+      - 14443:443/udp
+      - 14443:443/tcp
